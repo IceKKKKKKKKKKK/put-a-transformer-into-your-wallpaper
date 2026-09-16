@@ -6,13 +6,13 @@ All visualization and model credit belongs to the original **[Transformer Explai
 
 > its a legendary incredible work
 
-This independent project provides the Lively wrapper, centering, themes, installation guide, and a **fully local webpage + NVIDIA CUDA inference mode**. It does not claim authorship of Transformer Explainer and is not an official affiliated project. See [CITATION.bib](CITATION.bib) for the original paper and [CREDIT.md](CREDIT.md) for full attribution.
+Hope it gives you a GEEK wallpaper if you love deep learning. It does not claim authorship of Transformer Explainer and is not an official affiliated project. See [CITATION.bib](CITATION.bib) for the original paper and [CREDIT.md](CREDIT.md) for full attribution.
 
 ## Demo
 
 [![Watch the demo](media/demo.gif)](https://github.com/IceKKKKKKKKKKK/transformer-explainer-wallpaper/raw/refs/heads/main/media/demo.mp4)
 
-[Watch or download the 64-second MP4](https://github.com/IceKKKKKKKKKKK/transformer-explainer-wallpaper/raw/refs/heads/main/media/demo.mp4). This updated user-recorded clip shows the **local GPT-2 / CUDA version** on the Windows 11 desktop. See [recording details and credits](media/README.md).
+[Watch or download the 64-second MP4](https://github.com/IceKKKKKKKKKKK/transformer-explainer-wallpaper/raw/refs/heads/main/media/demo.mp4). 
 
 ## Install with Codex
 
