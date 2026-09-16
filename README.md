@@ -12,7 +12,7 @@ This independent project provides only the Lively wrapper, centering, themes, an
 
 [![Watch the demo](media/demo.gif)](https://github.com/IceKKKKKKKKKKK/transformer-explainer-wallpaper/raw/refs/heads/main/media/demo.mp4)
 
-[Watch or download the 37-second MP4](https://github.com/IceKKKKKKKKKKK/transformer-explainer-wallpaper/raw/refs/heads/main/media/demo.mp4). The clip starts with the installed desktop wallpaper, then shows real interaction in **Lively's Preview window** at 2x playback, with the Windows taskbar visible: switch examples, expand Attention, inspect a weight, change Temperature, and generate another token. See [recording details and credits](media/README.md).
+[Watch or download the 56-second MP4](https://github.com/IceKKKKKKKKKKK/transformer-explainer-wallpaper/raw/refs/heads/main/media/demo.mp4). This user-recorded clip shows interaction with the installed black wallpaper on the **Windows 11 desktop**, with the bottom taskbar visible throughout. It preserves the supplied recording's duration, playback speed, and audio, with attribution and the paper citation added above the visualization. See [recording details and credits](media/README.md).
 
 ## Install with Codex
 

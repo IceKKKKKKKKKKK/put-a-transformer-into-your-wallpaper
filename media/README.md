@@ -2,9 +2,11 @@
 
 [Watch or download demo.mp4](https://github.com/IceKKKKKKKKKKK/transformer-explainer-wallpaper/raw/refs/heads/main/media/demo.mp4).
 
-The opening shot shows the installed black wallpaper on a Windows 11 desktop. The interaction segment uses Lively's maximized **Preview window**, because the automation tool can target that window but cannot target the wallpaper's desktop layer. The actual Windows taskbar stays visible in both segments. This distinction is also labeled in the video.
+This user-recorded demonstration shows the installed black Transformer Explainer wallpaper on the **Windows 11 desktop**, with the actual bottom taskbar visible throughout. It includes interaction with the prompt, attention diagram, MLP explanation, and sampling controls.
 
-The 37-second video shows actual mouse input: choosing an example, expanding the Attention calculation, inspecting a dot-product value, changing Temperature and its probability distribution, and clicking Generate to advance the text and update the diagram. These are recordings of the running application, not simulated animation. Idle time is trimmed and the interaction segment plays at 2x speed, as labeled on screen; no interaction or taskbar is composited into the footage. Audio is omitted. The GIF is a smaller version of the same video.
+The MP4 is 56.2 seconds long at 1920 × 1080 and 30 fps. The supplied recording's duration, playback speed, framing, and audio are preserved. FFmpeg adds the original team's credit, the exact phrase below, the paper citation, and the original application URL in the unused space above the visualization. The interaction and taskbar are part of the recording; they are not composited into it.
+
+The GIF is a silent, smaller version of the same full clip at 1280 × 720 and 10 fps. The poster is a still from the updated video.
 
 ## Credit
 
