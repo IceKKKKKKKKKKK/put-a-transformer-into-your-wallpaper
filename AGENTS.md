@@ -17,7 +17,7 @@ This repository contains a small presentation wrapper for the original remote Tr
 4. Open Lively's official **Add Wallpaper -> Choose a file** flow and select the ZIP. Complete the import. A bare external folder passed to `setwp` is not an import and may do nothing. Do not write Lively's internal library database to simulate an import.
 5. Select the verified target screen and apply the imported wallpaper with **Per Screen** arrangement. If the user already uses a Span or Duplicate arrangement, explain the impact and resolve that conflict before replacing it. Keep all other per-screen assignments intact.
 6. Set the web player to **WebView2**, enable disk cache, and enable **Keyboard** input (which includes mouse). Explain that Lively hides desktop icons globally in Keyboard mode; if that conflicts with the user's preferences, offer mouse-only input. Enable pointer movement forwarding if that control is available. Enable Start with Windows, pause on fullscreen apps, and continue with ordinary focused windows.
-7. Close the upstream tutorial overlay. Wait until model loading finishes and Generate is enabled. First load may fetch roughly 600 MB; do not mistake slow model initialization for a failed installation.
+7. Close the upstream tutorial overlay. Wait until model loading finishes and Generate is enabled on the actual desktop. The wrapper uses a credentialless iframe to avoid an observed WebView2 cached-model Blob failure; explain that roughly 600 MB may download on every wallpaper restart and upstream session data does not persist. The upstream app disables prompt editing while loading, while a diagram block is expanded, or while a weight popover is open; mouse interaction alone is not a readiness check. If initialization stays stuck, temporarily allow playback during fullscreen apps, close and reapply only the target wallpaper, preserve caches, and restore the previous pause rule once ready. Preview uses a separate browser profile and is not proof that the installed instance loaded.
 8. Center the visualization. Default iframe height is 900 px and offset is 0. Use **Customize Wallpaper** to adjust `frameHeight` and `verticalOffset` to the actual screen; positive offset moves down. Check the diagram itself, not only the surrounding page. `theme` is a dropdown: 0 = Black, 1 = White.
 
 ## Supported CLI after import
@@ -27,7 +27,14 @@ Find the actual Lively executable and configured library path; do not hard-code 
 ```powershell
 & $livelyExe setwp --file $registeredWallpaperDirectory --monitor $verifiedLivelyIndex
 & $livelyExe setprop --monitor $verifiedLivelyIndex --property 'theme=0'
-& $livelyExe seekwp --monitor $verifiedLivelyIndex --value 0
+```
+
+For a stuck WebView2 wallpaper, close and reapply the registered project on only the target screen. Lively 2.2.1.0's WebView2 reload-message handler does nothing, so do not rely on `seekwp --value 0` as a successful reload for that version. Wait for the close to finish before reapplying.
+
+```powershell
+& $livelyExe closewp --monitor $verifiedLivelyIndex
+# Verify the target wallpaper has closed before continuing.
+& $livelyExe setwp --file $registeredWallpaperDirectory --monitor $verifiedLivelyIndex
 ```
 
 Use `theme=1` for white. Run only with discovered paths and verified indices. See the official [CLI documentation](https://github.com/rocksdanister/lively/wiki/Command-Line-Controls), [web player documentation](https://github.com/rocksdanister/lively/wiki/Web-Player), and [package format](https://github.com/rocksdanister/lively/wiki/Lively-Wallpaper-File).

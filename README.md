@@ -42,8 +42,18 @@ Use **Customize Wallpaper** to switch the theme or adjust the webpage height and
 
 - Black uses CSS inversion with hue compensation, so colors differ slightly from the original. White preserves the upstream appearance.
 - Lively's **Keyboard** input mode includes mouse support but hides Windows desktop icons globally. To keep your icons, use mouse-only mode and enter text in a separate browser window.
-- The first load downloads a large model (approximately 600 MB) and requires internet access. The wallpaper continues to depend on the original website. No model weights or persistent local server are bundled.
+- Model loading requires internet access and can download approximately 600 MB after each wallpaper restart. The wrapper uses a fresh iframe storage context to avoid the cached-model failure described below. The wallpaper continues to depend on the original website. No model weights or persistent local server are bundled.
 - Configure startup, fullscreen pausing, and continued playback behind ordinary windows in Lively Settings.
+
+## If the prompt will not accept text
+
+Check **Generate** first. The upstream app disables editing while its model is loading, while a diagram block is expanded, or while a weight popover is open. Mouse exploration can still work during model loading. Close expanded details and wait until the download message disappears and Generate becomes enabled; enabling Lively's Keyboard setting alone does not unlock the field.
+
+If loading stays stuck, keep the wallpaper running without fullscreen pausing during initialization, then close and reapply only that wallpaper in Lively. Preserve existing caches. Restore your normal fullscreen pause rule afterward. Confirm readiness on the actual desktop, since Preview uses a separate browser profile and can work while the desktop instance is still stuck.
+
+In a verified WebView2 case, model initialization failed with `ERR_BLOB_OUT_OF_MEMORY` when reopening cached model data, while a fresh profile worked. Resetting the profile only fixed its first load. This wrapper therefore uses a [`credentialless` iframe](https://developer.chrome.com/blog/iframe-credentialless), giving the upstream app fresh storage for each wallpaper session. This avoids the observed cached-model path without changing the visualization or deleting existing caches. The tradeoff is repeated model downloads and no persistence of upstream session data. It requires a browser engine supporting that iframe attribute; use current WebView2.
+
+Once ready, click the prompt and leave the pointer on the wallpaper's monitor while typing. Lively routes forwarded keys to the monitor under the pointer and only forwards them when the Windows desktop has focus. Chinese IME input also has a [known upstream limitation](https://github.com/rocksdanister/lively/issues/316); test plain English separately.
 
 ## Development
 

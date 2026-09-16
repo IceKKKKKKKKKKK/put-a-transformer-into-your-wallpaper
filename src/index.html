@@ -23,7 +23,9 @@
 </head>
 <body>
   <!-- Visualization and model: Polo Club's Transformer Explainer. See CREDIT.md. -->
-  <iframe title="Interactive Transformer Explainer"
+  <!-- A fresh storage context avoids WebView2's observed cached-model Blob failure.
+       The model may need to download again after a wallpaper restart. -->
+  <iframe credentialless title="Interactive Transformer Explainer"
     src="https://poloclub.github.io/transformer-explainer/" allow="autoplay"></iframe>
   <script>
     // Change only the presentation frame. The upstream application is unmodified.
