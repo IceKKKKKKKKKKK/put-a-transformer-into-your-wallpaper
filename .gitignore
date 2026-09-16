@@ -1,0 +1,5 @@
+.build/
+.recording/
+*.log
+Desktop.ini
+Thumbs.db

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en" data-theme="black">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Transformer Explainer Wallpaper</title>
+  <style>
+    :root { --frame-height: 900px; --vertical-offset: 0px; }
+    html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: #000; }
+    body { display: grid; place-items: center; }
+    iframe {
+      display: block;
+      width: 100%;
+      height: min(var(--frame-height), 100vh);
+      border: 0;
+      transform: translateY(var(--vertical-offset));
+      background: #fff;
+      filter: invert(1) hue-rotate(180deg);
+    }
+    html[data-theme="white"], html[data-theme="white"] body { background: #fff; }
+    html[data-theme="white"] iframe { filter: none; }
+  </style>
+</head>
+<body>
+  <!-- Visualization and model: Polo Club's Transformer Explainer. See CREDIT.md. -->
+  <iframe title="Interactive Transformer Explainer"
+    src="https://poloclub.github.io/transformer-explainer/" allow="autoplay"></iframe>
+  <script>
+    // Change only the presentation frame. The upstream application is unmodified.
+    function livelyPropertyListener(name, value) {
+      const number = Number(value);
+      if (!Number.isFinite(number)) return;
+      if (name === 'theme' && (number === 0 || number === 1)) {
+        document.documentElement.dataset.theme = number === 1 ? 'white' : 'black';
+      } else if (name === 'frameHeight') {
+        document.documentElement.style.setProperty('--frame-height', `${Math.max(700, Math.min(1440, number))}px`);
+      } else if (name === 'verticalOffset') {
+        document.documentElement.style.setProperty('--vertical-offset', `${Math.max(-200, Math.min(200, number))}px`);
+      }
+    }
+  </script>
+</body>
+</html>
