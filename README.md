@@ -8,6 +8,12 @@ All visualization and model credit belongs to the original **[Transformer Explai
 
 This independent project provides only the Lively wrapper, centering, themes, and installation guide. It does not claim authorship of Transformer Explainer and is not an official affiliated project. See [CITATION.bib](CITATION.bib) for the original paper and [CREDIT.md](CREDIT.md) for full attribution.
 
+## Demo
+
+[![Watch the demo](media/demo.gif)](https://github.com/IceKKKKKKKKKKK/transformer-explainer-wallpaper/raw/refs/heads/main/media/demo.mp4)
+
+[Watch or download the 37-second MP4](https://github.com/IceKKKKKKKKKKK/transformer-explainer-wallpaper/raw/refs/heads/main/media/demo.mp4). The clip starts with the installed desktop wallpaper, then shows real interaction in **Lively's Preview window** at 2x playback, with the Windows taskbar visible: switch examples, expand Attention, inspect a weight, change Temperature, and generate another token. See [recording details and credits](media/README.md).
+
 ## Install with Codex
 
 You need Windows 11 and **Codex running locally on that computer with terminal and Windows UI access**. Copy either prompt below. Replace "Windows display 1" with your preferred screen.
