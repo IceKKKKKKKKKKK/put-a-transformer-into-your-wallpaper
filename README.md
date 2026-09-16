@@ -1,46 +1,46 @@
 # Transformer Explainer Wallpaper
 
-把 [Transformer Explainer](https://poloclub.github.io/transformer-explainer/) 变成 Windows 11 的可交互桌面壁纸，主体居中，提供 **黑色 / 白色** 两种选择。
+Use [Transformer Explainer](https://poloclub.github.io/transformer-explainer/) as an interactive Windows 11 desktop wallpaper, centered on your screen, with **black and white themes**.
 
 All visualization and model credit belongs to the original **[Transformer Explainer team / Polo Club](https://github.com/poloclub/transformer-explainer)**.
 
 > its a legendary incredible work
 
-本项目仅提供 Lively 壁纸外框、居中布局、配色与安装指引。不是 Transformer Explainer 的作者，也不是官方关联项目。论文引用见 [CITATION.bib](CITATION.bib)，完整致谢见 [CREDIT.md](CREDIT.md)。
+This independent project provides only the Lively wrapper, centering, themes, and installation guide. It does not claim authorship of Transformer Explainer and is not an official affiliated project. See [CITATION.bib](CITATION.bib) for the original paper and [CREDIT.md](CREDIT.md) for full attribution.
 
-## 交给 Codex 安装
+## Install with Codex
 
-需要 Windows 11，以及**运行在这台电脑上、可访问终端和 Windows 界面的 Codex**。让 Codex 克隆本仓库并读取 [AGENTS.md](AGENTS.md)，复制下面任意一段即可；将“显示器 1”换成你要使用的屏幕。
+You need Windows 11 and **Codex running locally on that computer with terminal and Windows UI access**. Copy either prompt below. Replace "Windows display 1" with your preferred screen.
 
-**黑色：**
-
-```text
-请克隆 https://github.com/IceKKKKKKKKKKK/transformer-explainer-wallpaper，读取仓库 AGENTS.md，完成整套 Lively 安装和配置，把黑色 Transformer Explainer 壁纸应用到 Windows 显示器 1。核对屏幕映射，保留其他屏幕设置，启用鼠标和键盘交互、缓存及开机启动，并验证真实桌面输入和生成。不要自动重启 Windows。
-```
-
-**白色：**
+**Black theme:**
 
 ```text
-请克隆 https://github.com/IceKKKKKKKKKKK/transformer-explainer-wallpaper，读取仓库 AGENTS.md，完成整套 Lively 安装和配置，把白色 Transformer Explainer 壁纸应用到 Windows 显示器 1。核对屏幕映射，保留其他屏幕设置，启用鼠标和键盘交互、缓存及开机启动，并验证真实桌面输入和生成。不要自动重启 Windows。
+Clone https://github.com/IceKKKKKKKKKKK/transformer-explainer-wallpaper and read AGENTS.md. Complete the Lively installation and setup, then apply the black Transformer Explainer wallpaper to Windows display 1. Verify the display mapping, preserve the other screens, enable mouse and keyboard interaction, caching, and startup, and test typing and generation on the actual desktop. Do not restart Windows automatically.
 ```
 
-Codex 没有桌面控制能力时，仍能准备文件；ZIP 导入和最终交互检查需要你配合。云端 Codex 无法直接设置另一台 Windows 电脑的桌面。
+**White theme:**
 
-## 也可以直接安装
+```text
+Clone https://github.com/IceKKKKKKKKKKK/transformer-explainer-wallpaper and read AGENTS.md. Complete the Lively installation and setup, then apply the white Transformer Explainer wallpaper to Windows display 1. Verify the display mapping, preserve the other screens, enable mouse and keyboard interaction, caching, and startup, and test typing and generation on the actual desktop. Do not restart Windows automatically.
+```
 
-1. 安装官方 [Lively Wallpaper](https://www.rocksdanister.com/lively/)。
-2. 下载 [黑色 ZIP](https://github.com/IceKKKKKKKKKKK/transformer-explainer-wallpaper/raw/refs/heads/main/dist/Transformer-Explainer-black.zip) 或 [白色 ZIP](https://github.com/IceKKKKKKKKKKK/transformer-explainer-wallpaper/raw/refs/heads/main/dist/Transformer-Explainer-white.zip)，在 Lively 里选择 **Add Wallpaper → Choose a file** 导入 ZIP。
-3. 选择目标屏幕，使用 **Per Screen**；网页引擎选 **WebView2**。在设置中开启鼠标/键盘输入与磁盘缓存，等待模型加载后输入文字并点 **Generate**。
+Without desktop control, Codex can prepare the files, but you will need to help with ZIP import and the final interaction check. A cloud Codex session cannot directly configure another computer's Windows desktop.
 
-在 **Customize Wallpaper** 中可随时切换 Theme，调整网页高度与上下位置。默认高度 900 px，在 2560 × 1440 屏幕上居中显示；其他屏幕可自行微调。
+## Manual installation
 
-- 黑色通过 CSS 反色及色相补偿实现，颜色会与原站略有不同；白色保留原站配色。
-- Lively 的 **Keyboard** 输入模式也支持鼠标，但会隐藏 Windows 桌面图标。这是全局行为；若需要保留图标，可使用鼠标模式并在浏览器里输入文字。
-- 首次加载会下载较大的模型（约 600 MB），需要联网；后续仍依赖原站。没有打包模型，也不需要常驻本地服务器。
-- 开机启动、全屏时暂停、普通窗口下继续播放，可在 Lively 设置中配置。
+1. Install the official [Lively Wallpaper](https://www.rocksdanister.com/lively/).
+2. Download the [black ZIP](https://github.com/IceKKKKKKKKKKK/transformer-explainer-wallpaper/raw/refs/heads/main/dist/Transformer-Explainer-black.zip) or [white ZIP](https://github.com/IceKKKKKKKKKKK/transformer-explainer-wallpaper/raw/refs/heads/main/dist/Transformer-Explainer-white.zip). In Lively, use **Add Wallpaper → Choose a file** to import the ZIP.
+3. Select your screen, use **Per Screen**, and choose **WebView2** as the web player. Enable mouse/keyboard input and disk caching in Settings. Wait for the model to load, type a prompt, and click **Generate**.
 
-## 开发
+Use **Customize Wallpaper** to switch the theme or adjust the webpage height and vertical offset. The default frame is 900 px high and centered on a 2560 × 1440 display; adjust it for your own screen.
 
-修改 `src/index.html` 后运行 `powershell -File scripts/Build-Packages.ps1`，生成两份可直接导入的 ZIP。仓库不包含个人显示器配置、缓存或模型权重。
+- Black uses CSS inversion with hue compensation, so colors differ slightly from the original. White preserves the upstream appearance.
+- Lively's **Keyboard** input mode includes mouse support but hides Windows desktop icons globally. To keep your icons, use mouse-only mode and enter text in a separate browser window.
+- The first load downloads a large model (approximately 600 MB) and requires internet access. The wallpaper continues to depend on the original website. No model weights or persistent local server are bundled.
+- Configure startup, fullscreen pausing, and continued playback behind ordinary windows in Lively Settings.
+
+## Development
+
+Edit `src/index.html`, then run `powershell -File scripts/Build-Packages.ps1` to build both importable ZIPs. The repository contains no personal display configuration, caches, or model weights.
 
 Wallpaper wrapper: MIT. Upstream attribution and license: [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Installation details follow [Lively's documentation](https://github.com/rocksdanister/lively/wiki).
