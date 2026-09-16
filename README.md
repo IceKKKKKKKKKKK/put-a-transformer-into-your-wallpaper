@@ -40,7 +40,7 @@ Without desktop control, Codex can prepare the files, but you will need to help 
 
 Use **Customize Wallpaper** to switch the theme or adjust the webpage height and vertical offset. The default frame is 900 px high and centered on a 2560 × 1440 display; adjust it for your own screen.
 
-- Black uses CSS inversion with hue compensation, so colors differ slightly from the original. White preserves the upstream appearance.
+- Black uses CSS inversion with hue compensation and a subtle 10% brightness lift for lines and labels against pure black, so colors differ slightly from the original. White preserves the upstream appearance.
 - Lively documents duplicate keystrokes when **Keyboard** forwarding and direct wallpaper focus both receive the same key. Use **Mouse** mode with WebView2 when this happens; the focused webpage can receive typing directly. Keyboard mode also hides desktop icons globally. Verify typing on the actual desktop because behavior varies by Lively/WebView2 version.
 - Installation requires internet once. Afterward, the webpage and model run locally at `http://127.0.0.1:8765/`; the browser no longer downloads the 626 MiB model after each restart. NVIDIA CUDA performs model inference. Reference links still require internet when opened. The ZIPs require the separately installed local service.
 - Configure startup, fullscreen pausing, and continued playback behind ordinary windows in Lively Settings.

@@ -15,7 +15,8 @@
       border: 0;
       transform: translateY(var(--vertical-offset));
       background: #fff;
-      filter: invert(1) hue-rotate(180deg);
+      /* Slightly lift lines and labels against pure black without crushing dim details. */
+      filter: invert(1) hue-rotate(180deg) brightness(1.10);
     }
     html[data-theme="white"], html[data-theme="white"] body { background: #fff; }
     html[data-theme="white"] iframe { filter: none; }
