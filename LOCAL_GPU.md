@@ -50,7 +50,6 @@ After installation, the webpage, JavaScript, styles, fonts, GPT-2 tokenizer, and
 
 The service binds only to `127.0.0.1`. It checks the Host and request Origin, allows no cross-origin API access, and serves a Content Security Policy that restricts page connections and assets to the local origin. It is not intended to be exposed to a LAN or the internet.
 
-GPU inference does not mean every task runs on the GPU. Matrix multiplications, normalization, attention Softmax, and GELU run through CUDA. A few shape operations run on CPU. Tokenization, sampling, layout, and animation stay in the webpage. Lively pausing the page stops its generation requests, but the separate GPU service keeps the model resident until stopped.
 
 The diagram uses D3, SVG, and JavaScript animation logic. CPU work updates the diagram and browser layout; WebView2 can use GPU acceleration for compositing, with rasterization depending on its rendering path. This is separate from CUDA model inference. See Chromium's [GPU compositing documentation](https://www.chromium.org/developers/design-documents/gpu-accelerated-compositing-in-chrome/).
 
@@ -64,7 +63,6 @@ The diagram uses D3, SVG, and JavaScript animation logic. CPU work updates the d
 - `local/prepare.py` applies the local transport, local assets, loading/error status, and an input-subscription fix so generation uses the current prompt. The original visualization and sampling implementation remain upstream.
 - Every service start profiles a harmless warm-up and requires actual CUDA MatMul events. Aggregate evidence is saved to `.runtime/cuda-verification.json`; profiling then stops.
 
-On the RTX 4090 setup, three test inputs compared all **721 outputs** against the same ONNX model on CPU. Top-token predictions matched; the largest absolute float32 difference was approximately **0.00047**. This checks numerical consistency, not language-model quality. Short warm inference calls were measured in tens of milliseconds; those timings exclude page transport and animation and are not a general benchmark.
 
 The [resource charts in the README](README.md#resource-usage) describe the earlier browser CPU/WASM version. They do **not** measure this CUDA service; its combined CPU/RAM/VRAM usage needs a separate benchmark.
 
