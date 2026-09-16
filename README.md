@@ -12,11 +12,11 @@ This independent project provides the Lively wrapper, centering, themes, install
 
 [![Watch the demo](media/demo.gif)](https://github.com/IceKKKKKKKKKKK/transformer-explainer-wallpaper/raw/refs/heads/main/media/demo.mp4)
 
-[Watch or download the 64-second MP4](https://github.com/IceKKKKKKKKKKK/transformer-explainer-wallpaper/raw/refs/heads/main/media/demo.mp4). This updated user-recorded clip shows the **local GPT-2 / CUDA version** on the Windows 11 desktop, with the bottom taskbar visible throughout. It preserves the supplied recording's duration, playback speed, and audio, with attribution and the paper citation added above the visualization. See [recording details and credits](media/README.md).
+[Watch or download the 64-second MP4](https://github.com/IceKKKKKKKKKKK/transformer-explainer-wallpaper/raw/refs/heads/main/media/demo.mp4). This updated user-recorded clip shows the **local GPT-2 / CUDA version** on the Windows 11 desktop. See [recording details and credits](media/README.md).
 
 ## Install with Codex
 
-You need Windows 11, an NVIDIA GPU, Python 3.11/3.12, Node.js 22+, Git, and **Codex running locally on that computer with terminal and Windows UI access**. Copy either prompt below. Replace "Windows display 1" with your preferred screen.
+You need Windows 11, an NVIDIA GPU, Python 3.11/3.12, Node.js 22+, Git, and **Codex running locally**. Copy either prompt below. Replace "Windows display 1" with your preferred screen.
 
 **Black theme:**
 
