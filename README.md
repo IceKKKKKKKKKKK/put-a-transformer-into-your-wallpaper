@@ -1,4 +1,4 @@
-# Transformer Explainer Wallpaper
+# Put a Transformer into Your Wallpaper
 
 Use [Transformer Explainer](https://poloclub.github.io/transformer-explainer/) as an interactive Windows 11 desktop wallpaper, centered on your screen, with **black and white themes**.
 
