@@ -30,7 +30,7 @@ Clone https://github.com/IceKKKKKKKKKKK/transformer-explainer-wallpaper and read
 Clone https://github.com/IceKKKKKKKKKKK/transformer-explainer-wallpaper and read AGENTS.md. Install the fully local webpage and original model using the NVIDIA CUDA backend in LOCAL_GPU.md, enable its startup, complete the Lively setup, then apply the white Transformer Explainer wallpaper to Windows display 1. Verify the display mapping, preserve the other screens, enable working mouse and keyboard interaction without duplicate key forwarding, caching, and startup, and test typing and generation on the actual desktop. Do not restart Windows automatically.
 ```
 
-Without desktop control, Codex can prepare the files, but you will need to help with ZIP import and the final interaction check. A cloud Codex session cannot directly configure another computer's Windows desktop.
+Without desktop control, Codex can prepare the files, but you will need to help with ZIP import and the final interaction check. 
 
 ## Manual installation
 
