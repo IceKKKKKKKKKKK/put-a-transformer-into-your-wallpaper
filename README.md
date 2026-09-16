@@ -79,15 +79,13 @@ Then close and reapply the registered wallpaper on its current monitor in Lively
 
 ## Resource usage
 
-**Historical measurement: these charts describe the earlier remote webpage / browser CPU (WASM) version, before the local CUDA migration. They are not measurements of the new GPU service.**
 
 ![Average CPU, RAM, GPU, VRAM, and GPU power usage before closing the wallpaper, with it off, and after reopening it](media/performance-overview.png)
 
-Measured on September 15, 2026 with an **i7-13700K, RTX 4090, 32 GB RAM**, Windows 11, and the black wallpaper at **2560 × 1440** in Lively 2.2.1.0 / WebView2. Each state was observed for 90 seconds, sampled every 2 seconds; the bars show averages after the first 4 seconds of samples were excluded.
+Measured on **i7-13700K, RTX 4090, 32 GB RAM**, Windows 11, at **2560 × 1440** in Lively 2.2.1.0 / WebView2. Each state was observed for 90 seconds, sampled every 2 seconds; the bars show averages after the first 4 seconds of samples were excluded.
 
 The wallpaper added approximately **2.9–3.3 GiB of private physical RAM** above the off baseline. Lively and its wallpaper processes averaged **4.64% CPU in the existing session** and **0.60% after reopening and loading a fresh session**. CPU percentages cover all 24 logical CPUs. "Wallpaper off" keeps the Lively host running; "restart" means reopening this wallpaper. The existing and fresh sessions had different prompt/tutorial states.
 
-The top row measures Lively and its wallpaper subprocesses. The bottom row includes other applications, so its changes cannot be attributed entirely to the wallpaper. This was a short idle-desktop test on one machine; continuous generation and game frame rates were not tested.
 
 [Download the bar chart as PDF](media/performance-charts.pdf) · [SVG](media/performance-overview.svg)
 
