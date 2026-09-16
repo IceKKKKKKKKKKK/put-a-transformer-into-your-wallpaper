@@ -1,5 +1,8 @@
 .build/
 .recording/
+.runtime/
+.venv/
+__pycache__/
 *.log
 Desktop.ini
 Thumbs.db

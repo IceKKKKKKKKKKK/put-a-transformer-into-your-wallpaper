@@ -12,7 +12,7 @@
 
 Please cite the original research using [CITATION.bib](CITATION.bib). The entry follows the upstream repository's citation; the DOI is included for convenience.
 
-This independent repository by IceKKKKKKKKKKK contributes only the Lively presentation wrapper, black/white appearance, vertical centering, packaging, and Codex installation instructions. It loads the original website directly in an iframe. It does not implement the Transformer visualization, train the model, or distribute model weights. No affiliation or endorsement is implied.
+This independent repository by IceKKKKKKKKKKK contributes the Lively presentation wrapper, black/white appearance, vertical centering, packaging, Codex installation instructions, and a local CUDA inference adapter. The installer fetches a pinned upstream webpage and original ONNX model, makes small integration changes, and serves them locally. This repository does not claim authorship of the Transformer visualization or model and does not train a new model. Model weights are downloaded from upstream during installation and are not committed here. No affiliation or endorsement is implied.
 
 Screenshots and demonstration recordings show the original Transformer Explainer running inside this wrapper. All credit for the visualized application belongs to the original team. The black theme applies an overall CSS color filter and therefore changes the appearance of the upstream visualization.
 

@@ -19,16 +19,30 @@
     }
     html[data-theme="white"], html[data-theme="white"] body { background: #fff; }
     html[data-theme="white"] iframe { filter: none; }
+    #startup { position: absolute; color: #aaa; font: 16px Arial, sans-serif; text-align: center; }
   </style>
 </head>
 <body>
   <!-- Visualization and model: Polo Club's Transformer Explainer. See CREDIT.md. -->
-  <!-- A fresh storage context avoids WebView2's observed cached-model Blob failure.
-       The model may need to download again after a wallpaper restart. -->
-  <iframe credentialless title="Interactive Transformer Explainer"
-    src="https://poloclub.github.io/transformer-explainer/" allow="autoplay"></iframe>
+  <div id="startup" role="status">Waiting for the local GPU service…<br>Run scripts/Start-LocalGpu.ps1 if it is stopped.</div>
+  <iframe id="explainer" title="Interactive Transformer Explainer" style="visibility:hidden"
+    src="about:blank" allow="autoplay"></iframe>
   <script>
-    // Change only the presentation frame. The upstream application is unmodified.
+    // Wait for the local service, including when Lively starts first at sign-in.
+    // An image probe works from Lively's file origin without opening CORS access.
+    function connectLocal() {
+      const probe = new Image();
+      probe.onload = () => {
+        const frame = document.getElementById('explainer');
+        frame.src = 'http://127.0.0.1:8765/transformer-explainer/';
+        frame.style.visibility = 'visible';
+        document.getElementById('startup').hidden = true;
+      };
+      probe.onerror = () => setTimeout(connectLocal, 2000);
+      probe.src = 'http://127.0.0.1:8765/api/ready.png?t=' + Date.now();
+    }
+    connectLocal();
+    // Presentation controls shared by both themes.
     function livelyPropertyListener(name, value) {
       const number = Number(value);
       if (!Number.isFinite(number)) return;

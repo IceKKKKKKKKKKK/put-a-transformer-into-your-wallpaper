@@ -1,6 +1,8 @@
 # Third-party notices
 
-The wallpaper loads the original Transformer Explainer website remotely. Demonstration media depict that application. Its MIT license is reproduced below; the wrapper's separate license is in LICENSE.
+The local installer downloads a pinned copy of Transformer Explainer and its original ONNX model, applies a local inference transport adapter, and serves the webpage on the user's computer. Demonstration media depict the upstream visualization. Its MIT license is reproduced below; the wrapper and adapter's separate license is in LICENSE.
+
+The installer also downloads GPT-2 tokenizer files from [Xenova/gpt2](https://huggingface.co/Xenova/gpt2), and the Jersey 10 font from [Google Fonts](https://github.com/google/fonts/tree/main/ofl/jersey10) (SIL Open Font License 1.1). The font's OFL.txt is retained with the locally served font. JavaScript dependencies, KaTeX fonts, ONNX Runtime, and NVIDIA runtime libraries retain their own license files in the local installation; they are not included in the wallpaper ZIPs. Exact asset revisions and checksums are recorded in `local/fetch_assets.py`.
 
 Source: https://github.com/poloclub/transformer-explainer/blob/main/LICENSE
 

@@ -6,7 +6,7 @@ All visualization and model credit belongs to the original **[Transformer Explai
 
 > its a legendary incredible work
 
-This independent project provides only the Lively wrapper, centering, themes, and installation guide. It does not claim authorship of Transformer Explainer and is not an official affiliated project. See [CITATION.bib](CITATION.bib) for the original paper and [CREDIT.md](CREDIT.md) for full attribution.
+This independent project provides the Lively wrapper, centering, themes, installation guide, and a **fully local webpage + NVIDIA CUDA inference mode**. It does not claim authorship of Transformer Explainer and is not an official affiliated project. See [CITATION.bib](CITATION.bib) for the original paper and [CREDIT.md](CREDIT.md) for full attribution.
 
 ## Demo
 
@@ -16,36 +16,38 @@ This independent project provides only the Lively wrapper, centering, themes, an
 
 ## Install with Codex
 
-You need Windows 11 and **Codex running locally on that computer with terminal and Windows UI access**. Copy either prompt below. Replace "Windows display 1" with your preferred screen.
+You need Windows 11, an NVIDIA GPU, Python 3.11/3.12, Node.js 22+, Git, and **Codex running locally on that computer with terminal and Windows UI access**. Copy either prompt below. Replace "Windows display 1" with your preferred screen.
 
 **Black theme:**
 
 ```text
-Clone https://github.com/IceKKKKKKKKKKK/transformer-explainer-wallpaper and read AGENTS.md. Complete the Lively installation and setup, then apply the black Transformer Explainer wallpaper to Windows display 1. Verify the display mapping, preserve the other screens, enable mouse and keyboard interaction, caching, and startup, and test typing and generation on the actual desktop. Do not restart Windows automatically.
+Clone https://github.com/IceKKKKKKKKKKK/transformer-explainer-wallpaper and read AGENTS.md. Install the fully local webpage and original model using the NVIDIA CUDA backend in LOCAL_GPU.md, enable its startup, complete the Lively setup, then apply the black Transformer Explainer wallpaper to Windows display 1. Verify the display mapping, preserve the other screens, enable working mouse and keyboard interaction without duplicate key forwarding, caching, and startup, and test typing and generation on the actual desktop. Do not restart Windows automatically.
 ```
 
 **White theme:**
 
 ```text
-Clone https://github.com/IceKKKKKKKKKKK/transformer-explainer-wallpaper and read AGENTS.md. Complete the Lively installation and setup, then apply the white Transformer Explainer wallpaper to Windows display 1. Verify the display mapping, preserve the other screens, enable mouse and keyboard interaction, caching, and startup, and test typing and generation on the actual desktop. Do not restart Windows automatically.
+Clone https://github.com/IceKKKKKKKKKKK/transformer-explainer-wallpaper and read AGENTS.md. Install the fully local webpage and original model using the NVIDIA CUDA backend in LOCAL_GPU.md, enable its startup, complete the Lively setup, then apply the white Transformer Explainer wallpaper to Windows display 1. Verify the display mapping, preserve the other screens, enable working mouse and keyboard interaction without duplicate key forwarding, caching, and startup, and test typing and generation on the actual desktop. Do not restart Windows automatically.
 ```
 
 Without desktop control, Codex can prepare the files, but you will need to help with ZIP import and the final interaction check. A cloud Codex session cannot directly configure another computer's Windows desktop.
 
 ## Manual installation
 
-1. Install the official [Lively Wallpaper](https://www.rocksdanister.com/lively/).
+1. Clone this repository, then run `./scripts/Install-LocalGpu.ps1 -EnableStartup` in PowerShell. This downloads the webpage, original model, tokenizer, and isolated CUDA runtime. See [local GPU setup](LOCAL_GPU.md) for prerequisites and start/stop commands. Install the official [Lively Wallpaper](https://www.rocksdanister.com/lively/).
 2. Download the [black ZIP](https://github.com/IceKKKKKKKKKKK/transformer-explainer-wallpaper/raw/refs/heads/main/dist/Transformer-Explainer-black.zip) or [white ZIP](https://github.com/IceKKKKKKKKKKK/transformer-explainer-wallpaper/raw/refs/heads/main/dist/Transformer-Explainer-white.zip). In Lively, use **Add Wallpaper → Choose a file** to import the ZIP.
-3. Select your screen, use **Per Screen**, and choose **WebView2** as the web player. Enable mouse/keyboard input and disk caching in Settings. Wait for the model to load, type a prompt, and click **Generate**.
+3. Select your screen, use **Per Screen**, and choose **WebView2** as the web player. Start with **Mouse** input mode and enable disk caching. Wait for **Local GPU** to appear, click the prompt to focus it, type, and click **Generate**. Check the troubleshooting section if typing fails or duplicates.
 
 Use **Customize Wallpaper** to switch the theme or adjust the webpage height and vertical offset. The default frame is 900 px high and centered on a 2560 × 1440 display; adjust it for your own screen.
 
 - Black uses CSS inversion with hue compensation, so colors differ slightly from the original. White preserves the upstream appearance.
-- Lively's **Keyboard** input mode includes mouse support but hides Windows desktop icons globally. To keep your icons, use mouse-only mode and enter text in a separate browser window.
-- Model loading requires internet access and can download approximately 600 MB after each wallpaper restart. The wrapper uses a fresh iframe storage context to avoid the cached-model failure described below. The wallpaper continues to depend on the original website. No model weights or persistent local server are bundled.
+- Lively documents duplicate keystrokes when **Keyboard** forwarding and direct wallpaper focus both receive the same key. Use **Mouse** mode with WebView2 when this happens; the focused webpage can receive typing directly. Keyboard mode also hides desktop icons globally. Verify typing on the actual desktop because behavior varies by Lively/WebView2 version.
+- Installation requires internet once. Afterward, the webpage and model run locally at `http://127.0.0.1:8765/`; the browser no longer downloads the 626 MiB model after each restart. NVIDIA CUDA performs model inference. Reference links still require internet when opened. The ZIPs require the separately installed local service.
 - Configure startup, fullscreen pausing, and continued playback behind ordinary windows in Lively Settings.
 
 ## Resource usage
+
+**Historical measurement: these charts describe the earlier remote webpage / browser CPU (WASM) version, before the local CUDA migration. They are not measurements of the new GPU service.**
 
 ![Average CPU, RAM, GPU, VRAM, and GPU power usage before closing the wallpaper, with it off, and after reopening it](media/performance-overview.png)
 
@@ -59,16 +61,18 @@ The top row measures Lively and its wallpaper subprocesses. The bottom row inclu
 
 ## If the prompt will not accept text
 
-Check **Generate** first. The upstream app disables editing while its model is loading, while a diagram block is expanded, or while a weight popover is open. Mouse exploration can still work during model loading. Close expanded details and wait until the download message disappears and Generate becomes enabled; enabling Lively's Keyboard setting alone does not unlock the field.
+If each key appears twice, switch **Settings → Wallpaper → Wallpaper input** from **Keyboard** to **Mouse**, then click the prompt again. This is the [official workaround for duplicate key forwarding](https://github.com/rocksdanister/lively/releases).
+
+If no text appears, check **Generate** first. The upstream app disables editing while its model is loading, while a diagram block is expanded, or while a weight popover is open. Mouse exploration can still work during model loading. Close expanded details and wait until the local connection message disappears and Generate becomes enabled; enabling Lively's Keyboard setting alone does not unlock the field.
 
 If loading stays stuck, keep the wallpaper running without fullscreen pausing during initialization, then close and reapply only that wallpaper in Lively. Preserve existing caches. Restore your normal fullscreen pause rule afterward. Confirm readiness on the actual desktop, since Preview uses a separate browser profile and can work while the desktop instance is still stuck.
 
-In a verified WebView2 case, model initialization failed with `ERR_BLOB_OUT_OF_MEMORY` when reopening cached model data, while a fresh profile worked. Resetting the profile only fixed its first load. This wrapper therefore uses a [`credentialless` iframe](https://developer.chrome.com/blog/iframe-credentialless), giving the upstream app fresh storage for each wallpaper session. This avoids the observed cached-model path without changing the visualization or deleting existing caches. The tradeoff is repeated model downloads and no persistence of upstream session data. It requires a browser engine supporting that iframe attribute; use current WebView2.
+The earlier remote version used a credentialless iframe to work around a WebView2 cached-model Blob failure. The current local version loads the model in a separate CUDA service, so the browser no longer constructs that large model Blob. If **Local GPU** does not appear, run `./scripts/Start-LocalGpu.ps1` and check `.runtime/server.stderr.log`; then reload the page or reapply the wallpaper.
 
-Once ready, click the prompt and leave the pointer on the wallpaper's monitor while typing. Lively routes forwarded keys to the monitor under the pointer and only forwards them when the Windows desktop has focus. Chinese IME input also has a [known upstream limitation](https://github.com/rocksdanister/lively/issues/316); test plain English separately.
+Once ready, click the prompt and leave the pointer on the wallpaper's monitor while typing. If Keyboard forwarding is needed on your host, Lively routes forwarded keys to the monitor under the pointer and only forwards them when the Windows desktop has focus; test for duplicate characters before keeping that mode. Chinese IME input also has a [known upstream limitation](https://github.com/rocksdanister/lively/issues/316); test plain English separately.
 
 ## Development
 
-Edit `src/index.html`, then run `powershell -File scripts/Build-Packages.ps1` to build both importable ZIPs. The repository contains no personal display configuration, caches, or model weights.
+The local backend is in `local/server.py`; `local/prepare.py` patches the pinned upstream frontend. See [LOCAL_GPU.md](LOCAL_GPU.md). Edit the presentation wrapper in `src/index.html`, then run `powershell -File scripts/Build-Packages.ps1` to build both importable ZIPs. The repository contains no personal display configuration, caches, or model weights.
 
 Wallpaper wrapper: MIT. Upstream attribution and license: [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Installation details follow [Lively's documentation](https://github.com/rocksdanister/lively/wiki).
