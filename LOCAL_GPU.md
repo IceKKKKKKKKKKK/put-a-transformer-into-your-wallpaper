@@ -22,6 +22,8 @@ Then import `dist/Transformer-Explainer-black.zip` or `dist/Transformer-Explaine
 
 With WebView2, use Lively's **Mouse** input mode first and click the prompt before typing. Lively's extra **Keyboard** forwarding can duplicate keys when the wallpaper already receives them directly; Mouse mode is its documented workaround. Verify this on the actual desktop.
 
+If the pointer disappears after typing, see the [reversible mouse-pointer workaround](README.md#if-the-mouse-pointer-disappears-after-typing). This disables Windows' **Hide pointer while typing** preference for the current user; it is separate from duplicate-key handling and is not applied automatically by the installer.
+
 `-EnableStartup` creates a current-user Startup shortcut named **Transformer Explainer Local GPU**. Enable Lively's own startup setting as well. The wallpaper waits for the local service if Lively starts first. Sign-in recovery still needs testing on each computer; installation does not restart Windows to test it.
 
 ## Everyday controls
@@ -33,7 +35,14 @@ With WebView2, use Lively's **Mouse** input mode first and click the prompt befo
 
 Start is safe to run again when the verified service is already running. Stop releases its GPU resources; the wallpaper cannot generate again until the service resumes. To disable automatic startup, remove only the **Transformer Explainer Local GPU** shortcut from your Windows Startup folder. Keep the repository at its installed location or recreate the shortcut after moving it.
 
-The page displays **Local GPU · your GPU name** when ready. The health endpoint is `http://127.0.0.1:8765/api/health`. If startup fails, inspect `.runtime/server.stderr.log`. A port conflict is reported instead of stopping an unrelated application. A CUDA initialization failure stops startup instead of silently falling back to CPU-only inference.
+The page displays **Model · GPT-2 small (124M)** and **Inference · CUDA · your GPU name** when ready. Both labels use metadata from the running service; the model line is 22 px and the device line is 18 px. The local header omits the large title and PDF/YouTube/GitHub shortcuts; upstream credit and paper links remain in the article and repository. The health endpoint is `http://127.0.0.1:8765/api/health`. If startup fails, inspect `.runtime/server.stderr.log`. A port conflict is reported instead of stopping an unrelated application. A CUDA initialization failure stops startup instead of silently falling back to CPU-only inference.
+
+```powershell
+Invoke-RestMethod http://127.0.0.1:8765/api/health |
+    Select-Object ready, model_display, device, provider, cuda_matmul_verified
+```
+
+Before clicking **Generate**, require `ready=True`, `provider=CUDAExecutionProvider`, and `cuda_matmul_verified=True`. The detected device should match your intended NVIDIA GPU. A GPU process in Task Manager alone does not prove model inference uses CUDA, because WebView2 also uses a GPU process for rendering.
 
 ## What stays local
 
@@ -42,6 +51,8 @@ After installation, the webpage, JavaScript, styles, fonts, GPT-2 tokenizer, and
 The service binds only to `127.0.0.1`. It checks the Host and request Origin, allows no cross-origin API access, and serves a Content Security Policy that restricts page connections and assets to the local origin. It is not intended to be exposed to a LAN or the internet.
 
 GPU inference does not mean every task runs on the GPU. Matrix multiplications, normalization, attention Softmax, and GELU run through CUDA. A few shape operations run on CPU. Tokenization, sampling, layout, and animation stay in the webpage. Lively pausing the page stops its generation requests, but the separate GPU service keeps the model resident until stopped.
+
+The diagram uses D3, SVG, and JavaScript animation logic. CPU work updates the diagram and browser layout; WebView2 can use GPU acceleration for compositing, with rasterization depending on its rendering path. This is separate from CUDA model inference. See Chromium's [GPU compositing documentation](https://www.chromium.org/developers/design-documents/gpu-accelerated-compositing-in-chrome/).
 
 ## Reproducibility and checks
 

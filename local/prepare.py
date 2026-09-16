@@ -24,7 +24,7 @@ def save(name, text):
 
 
 page = original('src/routes/+page.svelte')
-page = page.replace("import * as ort from 'onnxruntime-web';", "import { connectLocal, localError, localStatus } from '~/utils/local-client';")
+page = page.replace("import * as ort from 'onnxruntime-web';", "import { connectLocal, localError, localStatus, localDevice } from '~/utils/local-client';")
 page = page.replace("import { fetchAndMergeChunks } from '~/utils/fetchChunks';", '')
 page = page.replace("import { AutoTokenizer }", "import { AutoTokenizer, env }")
 start = page.index('\tort.env.wasm.wasmPaths')
@@ -65,11 +65,16 @@ page = page.replace('</script>', '''</script>
 <div class="local-status" role="status">
   {#if $localError}
     <span role="alert">{$localError} Restart the local GPU service, then <button on:click={() => location.reload()}>reload</button>.</span>
-  {:else}{$localStatus}{/if}
+  {:else}
+    <span class="local-model">{$localStatus}</span>
+    {#if $localDevice}<span class="local-device">{$localDevice}</span>{/if}
+  {/if}
 </div>
 ''', 1)
 page = page.replace('<style lang="scss">', '''<style lang="scss">
-  .local-status { position:fixed; bottom:3px; right:12px; z-index:9999; font:11px Arial,sans-serif; background:white; color:#444; padding:3px 6px; }
+  .local-status { position:fixed; bottom:20px; right:112px; z-index:9999; display:flex; flex-direction:column; gap:4px; max-width:calc(100vw - 136px); font:18px/1.4 Arial,sans-serif; text-align:right; background:white; color:#333; padding:6px 10px; border-radius:4px; }
+  .local-model { font-size:22px; font-weight:600; }
+  .local-device { font-size:18px; }
   .local-status button { text-decoration:underline; }
 ''', 1)
 save('src/routes/+page.svelte', page)
@@ -97,6 +102,15 @@ form = original('src/components/InputForm.svelte')
 form = form.replace('// $isModelRunning ||', '$isModelRunning ||')
 form = form.replace('Try the examples while GPT-2 model is being downloaded (600MB)', 'Connecting to the local GPU service…')
 save('src/components/InputForm.svelte', form)
+
+# Desktop presentation: remove header branding/shortcuts, retain all attribution
+# and paper links in the upstream article and the repository's credit files.
+topbar = original('src/components/Topbar.svelte')
+topbar, logo_count = re.subn(r'\s*<div class="logo[^\"]*" data-click="logo">.*?</div>', '', topbar, count=1, flags=re.S)
+topbar, icons_count = re.subn(r'\s*<div class="icons[^\"]*">.*?</div>', '', topbar, count=1, flags=re.S)
+if (logo_count, icons_count) != (1, 1):
+    raise RuntimeError('Upstream header changed; review the local presentation patch.')
+save('src/components/Topbar.svelte', topbar)
 
 layout = original('src/routes/+layout.svelte')
 layout = layout.replace("import GTM from '~/utils/gtm.svelte';", '').replace('<GTM />', '')

@@ -3,13 +3,15 @@ import { writable } from 'svelte/store';
 
 export const localError = writable('');
 export const localStatus = writable('Connecting to local GPU…');
+export const localDevice = writable('');
 
 export async function connectLocal() {
   const response = await fetch('/api/health', { signal: AbortSignal.timeout(10000) });
   if (!response.ok) throw new Error('Local GPU service is unavailable.');
   const health = await response.json();
   if (!health.ready || !health.cuda_matmul_verified) throw new Error('CUDA is not ready.');
-  localStatus.set(`Local GPU · ${health.device}`);
+  localStatus.set(`Model · ${health.model_display || health.model}`);
+  localDevice.set(`Inference · CUDA · ${health.device}`);
   localError.set('');
   return true;
 }

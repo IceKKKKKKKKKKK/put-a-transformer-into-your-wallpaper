@@ -79,7 +79,8 @@ def load_model():
         pass
     state.update(ready=True, service='transformer-explainer-local', device=device,
                  provider='CUDAExecutionProvider', cuda_matmul_verified=True,
-                 model='Polo Club Transformer Explainer GPT-2', model_sha256=MODEL_SHA256)
+                 model='Polo Club Transformer Explainer GPT-2',
+                 model_display='GPT-2 small (124M)', model_sha256=MODEL_SHA256)
 
 
 @asynccontextmanager
