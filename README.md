@@ -45,6 +45,18 @@ Use **Customize Wallpaper** to switch the theme or adjust the webpage height and
 - Model loading requires internet access and can download approximately 600 MB after each wallpaper restart. The wrapper uses a fresh iframe storage context to avoid the cached-model failure described below. The wallpaper continues to depend on the original website. No model weights or persistent local server are bundled.
 - Configure startup, fullscreen pausing, and continued playback behind ordinary windows in Lively Settings.
 
+## Resource usage
+
+![Average CPU, RAM, GPU, VRAM, and GPU power usage before closing the wallpaper, with it off, and after reopening it](media/performance-overview.png)
+
+Measured on September 15, 2026 with an **i7-13700K, RTX 4090, 32 GB RAM**, Windows 11, and the black wallpaper at **2560 × 1440** in Lively 2.2.1.0 / WebView2. Each state was observed for 90 seconds, sampled every 2 seconds; the bars show averages after the first 4 seconds of samples were excluded.
+
+The wallpaper added approximately **2.9–3.3 GiB of private physical RAM** above the off baseline. Lively and its wallpaper processes averaged **4.64% CPU in the existing session** and **0.60% after reopening and loading a fresh session**. CPU percentages cover all 24 logical CPUs. "Wallpaper off" keeps the Lively host running; "restart" means reopening this wallpaper. The existing and fresh sessions had different prompt/tutorial states.
+
+The top row measures Lively and its wallpaper subprocesses. The bottom row includes other applications, so its changes cannot be attributed entirely to the wallpaper. This was a short idle-desktop test on one machine; continuous generation and game frame rates were not tested.
+
+[Download the bar chart as PDF](media/performance-charts.pdf) · [SVG](media/performance-overview.svg)
+
 ## If the prompt will not accept text
 
 Check **Generate** first. The upstream app disables editing while its model is loading, while a diagram block is expanded, or while a weight popover is open. Mouse exploration can still work during model loading. Close expanded details and wait until the download message disappears and Generate becomes enabled; enabling Lively's Keyboard setting alone does not unlock the field.
